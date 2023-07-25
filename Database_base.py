@@ -23,7 +23,7 @@ class DBase:
     def get_connection(self):
         return self._conn
 
-    def rest_database(self):
+    def reset_database(self):
         raise NotImplementedError("Must implement from the derived class")
 
     def close_db(self):

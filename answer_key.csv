@@ -1,77 +1,76 @@
-,,,,,,
-QuestionID,answer_options,correct_answer,,,,
-0,Secondary Memory,0,,,,
-0,Input/Output Devices,0,,,,
-0,Main Memory,0,,,,
-0,Central Processing Unit ,1,,,,
-1,Execute all of the computation and logic of the program ,0,,,,
-1,Take input from the user ,0,,,,
-1,Retrieve information from the internet ,0,,,,
-1,Store information for the long term - even beyond a power cycle ,1,,,,
-2,.py,1,,,,
-2,.doc,0,,,,
-2,.png,0,,,,
-2,.exe,0,,,,
-3,What is the wing velocity of a sparrow? ,0,,,,
-3,What Python script would you like me to run? ,0,,,,
-3,What is the next machine language instruction to run?,0,,,,
-3,What would you like to do next?,1,,,,
-4,my var,1,,,,
-4,my_var,0,,,,
-4,myVar,0,,,,
-4,_my_var,0,,,,
-5,To generate random values for the CPU,0,,,,
-5,Executes instructions in the memory.,0,,,,
-5,To share files across networks,0,,,,
-5,Short term memory where data is stored as the processor needs it.,1,,,,
-6,String,0,,,,
-6,Float,1,,,,
-6,Integer,0,,,,
-7,Variables and data types ,0,,,,
-7,Any code written in a programming language. ,0,,,,
-7,"Like a recipe, step-by-step instructions.",1,,,,
-7,Program termination,0,,,,
-8,TRUE,0,,,,
-8,FALSE,1,,,,
-9,List,0,,,,
-9,String,1,,,,
-9,It does not return any data type,0,,,,
-9,Integer,0,,,,
-10,TRUE,1,,,,
-10,FALSE,0,,,,
-11,float(),1,,,,
-11,str(),0,,,,
-11,int(),0,,,,
-11,You cannot convert strings to decimals,0,,,,
-12,TRUE,1,,,,
-12,FALSE,0,,,,
-13,Exits the program,0,,,,
-13,"Jumps to the ""top"" of the loop and starts the next iteration ",0,,,,
-13,Resets the iteration variable to its initial value ,0,,,,
-13,Exits the currently executing loop ,1,,,,
-14,append() adds the value to the end of the list while insert adds the value to the beginning of the list.,0,,,,
-14,They're both do the same thing,0,,,,
-14,"append() will add values only to the end of a list, insert() can add them anywhere in the list.",1,,,,
-14,Lists are immutable therefore insert() and append() wouldn't work.,0,,,,
-15,delete() and remove() list methods,0,,,,
-15,The del statement and the remove() method,1,,,,
-15,pop() and delete() list methods,0,,,,
-15,removeAt() and delete() lists methods,0,,,,
-16,Tuples can only contain integer data types while lists can contain any data type,0,,,,
-16,"Lists are mutable; they can have values added, removed, or changed. Tuples are immutable; they cannot be changed at all.",1,,,,
-16,"Tuples are mutable; they can have values added, removed, or changed. Lists are immutable; they cannot be changed at all.",0,,,,
-16,Lists are unordered data types which are unchangeable while tuples are ordered and changeable. ,0,,,,
-17,t = (42) ,0,,,,
-17,"t = (42,) (The trailing comma is mandatory.) ",1,,,,
-17,"t = (), .insert(42) ",0,,,,
-17,"t = [42,] ",0,,,,
-18,A list can contain a dictionary however a dictionary cannot contain a list.,0,,,,
-18,There is no difference. ,0,,,,
-18,The items stored in a dictionary are value paired.,1,,,,
-18,"The items stored in a dictionary are ordered, while the items in a list are unordered.",0,,,,
-19,( ),0,,,,
-19,< >,0,,,,
-19,[ ],0,,,,
-19,{ },1,,,,
-20,TRUE,1,,,,
-20,FALSE,0,,,,
+ID,QuestionID,AnswerText,Correct
+1,0,Secondary Memory,0
+2,0,Input/Output Devices,0
+3,0,Main Memory,0
+4,0,Central Processing Unit ,1
+5,1,Execute all of the computation and logic of the program ,0
+6,1,Take input from the user ,0
+7,1,Retrieve information from the internet ,0
+8,1,Store information for the long term - even beyond a power cycle ,1
+9,2,.py,1
+10,2,.doc,0
+11,2,.png,0
+12,2,.exe,0
+13,3,What is the wing velocity of a sparrow? ,0
+14,3,What Python script would you like me to run? ,0
+15,3,What is the next machine language instruction to run?,0
+16,3,What would you like to do next?,1
+17,4,my var,1
+18,4,my_var,0
+19,4,myVar,0
+20,4,_my_var,0
+21,5,To generate random values for the CPU,0
+22,5,Executes instructions in the memory.,0
+23,5,To share files across networks,0
+24,5,Short term memory where data is stored as the processor needs it.,1
+25,6,String,0
+26,6,Float,1
+27,6,Integer,0
+28,7,Variables and data types ,0
+29,7,Any code written in a programming language. ,0
+30,7,"Like a recipe, step-by-step instructions.",1
+31,7,Program termination,0
+32,8,TRUE,0
+33,8,FALSE,1
+34,9,List,0
+35,9,String,1
+36,9,It does not return any data type,0
+37,9,Integer,0
+38,10,TRUE,1
+39,10,FALSE,0
+40,11,float(),1
+41,11,str(),0
+42,11,int(),0
+43,11,You cannot convert strings to decimals,0
+44,12,TRUE,1
+45,12,FALSE,0
+46,13,Exits the program,0
+47,13,"Jumps to the ""top"" of the loop and starts the next iteration ",0
+48,13,Resets the iteration variable to its initial value ,0
+49,13,Exits the currently executing loop ,1
+50,14,append() adds the value to the end of the list while insert adds the value to the beginning of the list.,0
+51,14,They're both do the same thing,0
+52,14,"append() will add values only to the end of a list, insert() can add them anywhere in the list.",1
+53,14,Lists are immutable therefore insert() and append() wouldn't work.,0
+54,15,delete() and remove() list methods,0
+55,15,The del statement and the remove() method,1
+56,15,pop() and delete() list methods,0
+57,15,removeAt() and delete() lists methods,0
+58,16,Tuples can only contain integer data types while lists can contain any data type,0
+59,16,"Lists are mutable; they can have values added, removed, or changed. Tuples are immutable; they cannot be changed at all.",1
+60,16,"Tuples are mutable; they can have values added, removed, or changed. Lists are immutable; they cannot be changed at all.",0
+61,16,Lists are unordered data types which are unchangeable while tuples are ordered and changeable. ,0
+62,17,t = (42) ,0
+63,17,"t = (42,) (The trailing comma is mandatory.) ",1
+64,17,"t = (), .insert(42) ",0
+65,17,"t = [42,] ",0
+66,18,A list can contain a dictionary however a dictionary cannot contain a list.,0
+67,18,There is no difference. ,0
+68,18,The items stored in a dictionary are value paired.,1
+69,18,"The items stored in a dictionary are ordered, while the items in a list are unordered.",0
+70,19,( ),0
+71,19,< >,0
+72,19,[ ],0
+73,19,{ },1
+74,20,TRUE,1
+75,20,FALSE,0
