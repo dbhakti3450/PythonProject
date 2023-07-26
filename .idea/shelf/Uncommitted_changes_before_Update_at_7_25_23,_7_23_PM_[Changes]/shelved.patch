@@ -1,0 +1,181 @@
+Index: quiz_db_project.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Quiz Maker\n\"\"\"\nQuiz Maker - Make an application which takes various questions from a database, picked randomly,\nand puts together a quiz for students. Each quiz can be different and then reads a key to grade the quizzes.\n\"\"\"\n\n\"\"\"\nStrategy/approach to the project:\nStep 1. create quiz questions database with answer keys. Do we want questions to be multiple choices?\nStep 2. Write a program that randomly selects a set of questions from the database. Use random package.\n3. Display the questions to the user and ask for their answers.\n4. Grade the user's answers and display their score.\n5. Save the user's score to a file.\n\nTo incorporate ethics and critical thinking in the project, I would make sure that the questions are fair and unbiased.\nI would also make sure that the program is well-designed and easy to use. Additionally, I would provide the user with \nfeedback on their answers, so that they can learn from their mistakes and improve their critical thinking skills.\n\nHere are some additional ethical considerations for this project:\n\nThe questions should be appropriate for the target audience.\nThe answers should be accurate and up-to-date.\nThe program should not discriminate against any group of people.\nThe user's privacy should be protected.\n\nI believe that this project can be a valuable tool for learning and assessment. By incorporating ethics and critical \nthinking into the project, I can help to ensure that it is used in a responsible and ethical way.\n\"\"\"\n\nimport random as r\n\nclass Question: #this is for questions\n\n    def __init__(self,questions, answers, correct_answers):\n        self.question = questions\n        self.answers = answers\n        self.correct_answers = correct_answers\n\n    def ask_question(self, question, answers):\n        \"\"\"Asks the user a question and returns their answer.\"\"\"\n        self.question = question\n        self.answers = answers\n        print(question)\n\n        for index, answer in enumerate(answers):\n            print(f\"{index + 1}: {answer}\")\n\n        answer = input(\"Your answer: \")\n        return answer\n\n    def main():\n        \"\"\"The main function of the program.\"\"\"\n\n        questions = read_questions_from_database()\n        answers = read_answers_from_database()\n\n        score = 0\n        for question, answer in zip(questions, answers):\n            answer_given = ask_question(question, answers)\n            if answer_given == answer:\n                score += 1\n\n        print(f\"Your score is {score} out of {len(questions)}\")\n\n    if __name__ == \"__main__\":\n        main()\n\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/quiz_db_project.py b/quiz_db_project.py
+--- a/quiz_db_project.py	(revision ecb6b2beb5f04fd70bcc2b160add55f73609d320)
++++ b/quiz_db_project.py	(date 1690334632133)
+@@ -8,9 +8,9 @@
+ Strategy/approach to the project:
+ Step 1. create quiz questions database with answer keys. Do we want questions to be multiple choices?
+ Step 2. Write a program that randomly selects a set of questions from the database. Use random package.
+-3. Display the questions to the user and ask for their answers.
+-4. Grade the user's answers and display their score.
+-5. Save the user's score to a file.
++Step 3. Display the questions to the user and ask for their answers.
++Step 4. Grade the user's answers and display their score.
++Step 5. Save the user's score to a file.
+ 
+ To incorporate ethics and critical thinking in the project, I would make sure that the questions are fair and unbiased.
+ I would also make sure that the program is well-designed and easy to use. Additionally, I would provide the user with 
+@@ -28,42 +28,47 @@
+ """
+ 
+ import random as r
+-
+-class Question: #this is for questions
++import db_base as db
++import csv
+ 
+-    def __init__(self,questions, answers, correct_answers):
+-        self.question = questions
+-        self.answers = answers
+-        self.correct_answers = correct_answers
+ 
+-    def ask_question(self, question, answers):
+-        """Asks the user a question and returns their answer."""
+-        self.question = question
+-        self.answers = answers
+-        print(question)
++class Questions: #this is for questions
++    def __init__(self,questionID, Questions):
++        self.questionID = questionID
++        self.Questions = Questions
++class Csvlab(db.DBase):
++    def reset_or_create_db(self):
++        try:
++            sql = """ DROP TABLE IF EXISTS Questions;
++                CREATE TABLE Questions(Question_Number INT NOT NULL PRIMARY KEY UNIQUE,
++                    Questions TEXT)"""
++            super().execute_script(sql)
++        except Exception as e:
++            print("An error has occurred: ", e)
++        print(Questions)
+ 
+-        for index, answer in enumerate(answers):
+-            print(f"{index + 1}: {answer}")
++class Quiz:
++    """Shows List of Questions."""
++    def __init__(self,questions):
++        self.questions = questions
+ 
+-        answer = input("Your answer: ")
+-        return answer
++    def generate_quiz(self):
++        """Generates a quiz by randomly selecting questions from the pool of questions."""
++        quiz = []
++        for q in range(10):
++            question = r.choice(self.questions)
++            quiz.append(question)
++            return quiz
+ 
+-    def main():
+-        """The main function of the program."""
+-
+-        questions = read_questions_from_database()
+-        answers = read_answers_from_database()
+-
++    def grade_quiz(self,quiz,key):
++        """Grades a quiz by comparing the student's answers to the key."""
+         score = 0
+-        for question, answer in zip(questions, answers):
+-            answer_given = ask_question(question, answers)
+-            if answer_given == answer:
++        for question, answer in zip(quiz, key):
++            if question.answer == answer:
+                 score += 1
+ 
+-        print(f"Your score is {score} out of {len(questions)}")
+ 
+-    if __name__ == "__main__":
+-        main()
++
+ 
+ 
+ 
+Index: mis_codes.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/mis_codes.py b/mis_codes.py
+new file mode 100644
+--- /dev/null	(date 1690334632137)
++++ b/mis_codes.py	(date 1690334632137)
+@@ -0,0 +1,29 @@
++
++def ask_question(self, question, answers):
++    """Asks the user a question and returns their answer."""
++    self.question = question
++    self.answers = answers
++    print(question)
++
++    for index, answer in enumerate(answers):
++        print(f"{index + 1}: {answer}")
++
++    answer = input("Your answer: ")
++    return answer
++
++ def main():
++
++        questions = read_questions_from_database()
++        answers = read_answers_from_database()
++
++        score = 0
++        for question, answer in zip(questions, answers):
++            answer_given = ask_question(question, answers)
++            if answer_given == answer:
++                score += 1
++
++        print(f"Your score is {score} out of {len(questions)}")
++
++    if __name__ == "__main__":
++        questions = []
++        with open("Questions.csv", "r")
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"123b2166-a527-49de-a38e-44f2f6929b48\" name=\"Changes\" comment=\"\" />\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Python Script\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2SpCZP5avVAqBlaA9j1qYbDvISB\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"git-widget-placeholder\": \"main\"\n  }\n}]]></component>\n  <component name=\"RunManager\">\n    <configuration name=\"main\" type=\"PythonConfigurationType\" factoryName=\"Python\" nameIsGenerated=\"true\">\n      <module name=\"PythonProject\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/main.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"123b2166-a527-49de-a38e-44f2f6929b48\" name=\"Changes\" comment=\"\" />\n      <created>1689834190262</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1689834190262</updated>\n    </task>\n    <servers />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision ecb6b2beb5f04fd70bcc2b160add55f73609d320)
++++ b/.idea/workspace.xml	(date 1690331159621)
+@@ -4,7 +4,11 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="123b2166-a527-49de-a38e-44f2f6929b48" name="Changes" comment="" />
++    <list default="true" id="123b2166-a527-49de-a38e-44f2f6929b48" name="Changes" comment="">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Database_base.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_base.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/quiz_db_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/quiz_db_project.py" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -25,12 +29,12 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "git-widget-placeholder": "main"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;main&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RunManager">
+     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+       <module name="PythonProject" />
+diff --git a/Database_base.py b/db_base.py
+rename from Database_base.py
+rename to db_base.py
