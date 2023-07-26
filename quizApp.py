@@ -98,14 +98,33 @@ class Player(object):
         return self.id
 
 
-if __name__ == '__main__':
-    dbh = DatabaseHandler("quizApp.sqlite")
-
+def reset_game_database(dbh):
+    # Implement the logic to reset the database here
     if not dbh.check_db_ready():
         print("No database found. Initializing new database...")
         dbh.reset_db()
         print("Done!\n")
+    else:
+        print("Database already exists, start playing!")
 
+
+def show_high_score(dbh):
+    # Implement the logic to show the high score here
+    print("\nHigh scores:")
+    rank = 0
+    print("  {0} {1} {2}".format("Rank", "Pts", "Name"))
+    for hs_entry in dbh.get_highscores():
+        rank += 1
+        print("  {0:3d}. {1:3d} {2}".format(rank, hs_entry['score'], hs_entry['name']))
+
+
+def delete_high_score():
+    # Implement the logic to delete the high score here
+    print("High score deleted.")
+
+
+def play_quiz(dbh):
+    # Implement the logic to play the quiz here
     name = ""
     while name.strip() == "":
         name = input("Please enter your name: ")
@@ -174,5 +193,44 @@ if __name__ == '__main__':
         # include an indicator for the current player if they make the cut
         indic = "<------" if hs_entry['id'] == player.get_id() else ""
         print("  {0:3d}. {1:3d} {2} {3}".format(rank, hs_entry['score'], hs_entry['name'], indic))
+
+
+def check_database(dbh):
+    if not dbh.check_db_ready():
+        print("No database found. Please Initialize the Database...")
+    else:
+        print("Database is ready lets Play")
+
+
+if __name__ == '__main__':
+
+    dbh = DatabaseHandler("quizApp.sqlite")
+
+    while True:
+        print("\nWelcome to QuiZapp!:")
+        print("\nMenu:")
+        print("1. Check database")
+        print("2. Reset database")
+        print("3. Show high score")
+        print("4. Delete high score")
+        print("5. Play Quiz")
+        print("6. Quit")
+
+        choice = input("Enter your choice (1/2/3/4/5/6): ")
+
+        if choice == '1':
+            check_database(dbh)
+        elif choice == '2':
+            reset_game_database(dbh)
+        elif choice == '3':
+            show_high_score(dbh)
+        elif choice == '4':
+            delete_high_score()
+        elif choice == '5':
+            play_quiz(dbh)
+        elif choice == '6':
+            break
+        else:
+            print("Invalid choice. Please choose again.")
 
     dbh.close_db()
