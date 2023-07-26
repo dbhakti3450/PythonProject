@@ -32,7 +32,7 @@ import db_base as db
 import csv
 
 
-class Questions:
+class Questions: #this is for questions
     def __init__(self,questionID, Questions):
         self.questionID = questionID
         self.Questions = Questions
@@ -46,20 +46,6 @@ class Csvlab(db.DBase):
         except Exception as e:
             print("An error has occurred: ", e)
         print(Questions)
-
-    def read_csv(self, file_name):
-        self.questions_list = []
-
-        try:
-            with open(file_name, 'r') as record:
-                csv_contents = csv.reader(record)
-                next(record)
-                for row in csv_contents:
-                    questions = Questions(row)
-                    self.questions_list.append(questions)
-
-        except Exception as e:
-            print("An error has occurred: ", e)
 
 class Quiz:
     """Shows List of Questions."""
