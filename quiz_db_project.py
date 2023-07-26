@@ -8,9 +8,9 @@ and puts together a quiz for students. Each quiz can be different and then reads
 Strategy/approach to the project:
 Step 1. create quiz questions database with answer keys. Do we want questions to be multiple choices?
 Step 2. Write a program that randomly selects a set of questions from the database. Use random package.
-3. Display the questions to the user and ask for their answers.
-4. Grade the user's answers and display their score.
-5. Save the user's score to a file.
+Step 3. Display the questions to the user and ask for their answers.
+Step 4. Grade the user's answers and display their score.
+Step 5. Save the user's score to a file.
 
 To incorporate ethics and critical thinking in the project, I would make sure that the questions are fair and unbiased.
 I would also make sure that the program is well-designed and easy to use. Additionally, I would provide the user with 
@@ -28,42 +28,47 @@ thinking into the project, I can help to ensure that it is used in a responsible
 """
 
 import random as r
+import db_base as db
+import csv
 
-class Question: #this is for questions
 
-    def __init__(self,questions, answers, correct_answers):
-        self.question = questions
-        self.answers = answers
-        self.correct_answers = correct_answers
+class Questions: #this is for questions
+    def __init__(self,questionID, Questions):
+        self.questionID = questionID
+        self.Questions = Questions
+class Csvlab(db.DBase):
+    def reset_or_create_db(self):
+        try:
+            sql = """ DROP TABLE IF EXISTS Questions;
+                CREATE TABLE Questions(Question_Number INT NOT NULL PRIMARY KEY UNIQUE,
+                    Questions TEXT)"""
+            super().execute_script(sql)
+        except Exception as e:
+            print("An error has occurred: ", e)
+        print(Questions)
 
-    def ask_question(self, question, answers):
-        """Asks the user a question and returns their answer."""
-        self.question = question
-        self.answers = answers
-        print(question)
+class Quiz:
+    """Shows List of Questions."""
+    def __init__(self,questions):
+        self.questions = questions
 
-        for index, answer in enumerate(answers):
-            print(f"{index + 1}: {answer}")
+    def generate_quiz(self):
+        """Generates a quiz by randomly selecting questions from the pool of questions."""
+        quiz = []
+        for q in range(10):
+            question = r.choice(self.questions)
+            quiz.append(question)
+            return quiz
 
-        answer = input("Your answer: ")
-        return answer
-
-    def main():
-        """The main function of the program."""
-
-        questions = read_questions_from_database()
-        answers = read_answers_from_database()
-
+    def grade_quiz(self,quiz,key):
+        """Grades a quiz by comparing the student's answers to the key."""
         score = 0
-        for question, answer in zip(questions, answers):
-            answer_given = ask_question(question, answers)
-            if answer_given == answer:
+        for question, answer in zip(quiz, key):
+            if question.answer == answer:
                 score += 1
 
-        print(f"Your score is {score} out of {len(questions)}")
 
-    if __name__ == "__main__":
-        main()
+
 
 
 
