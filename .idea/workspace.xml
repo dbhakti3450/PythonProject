@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="123b2166-a527-49de-a38e-44f2f6929b48" name="Changes" comment="" />
+    <list default="true" id="123b2166-a527-49de-a38e-44f2f6929b48" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/csv-editor.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mis_codes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database_base.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Questions .csv" beforeDir="false" afterPath="$PROJECT_DIR$/Questions.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quiz_db_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/quiz_db_project.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,6 +35,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main"
   }
 }]]></component>
