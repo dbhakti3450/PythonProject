@@ -19,7 +19,7 @@ class DatabaseHandler(db.DBase):
         """Return all possible answers for a given question"""
         super().get_cursor.execute("SELECT answertext,correct FROM answers WHERE questionid=?", (questionid,))
         return [{'answertext': answertext, 'correct': correct} for answertext, correct in
-                super().get_cursor.fetchall()];
+                super().get_cursor.fetchall()]
 
     def get_score(self, playerid):
         """Return score for a given player id"""
@@ -34,7 +34,17 @@ class DatabaseHandler(db.DBase):
     def get_highscores(self, count=5):
         """Get top scores. Most recent entries are preferred in the event of a tie."""
         super().get_cursor.execute("SELECT id,name,score FROM players ORDER BY score DESC, id DESC LIMIT ?", (count,))
-        return [{'id': id, 'name': name, 'score': score} for id, name, score in super().get_cursor.fetchall()];
+        return [{'id': id, 'name': name, 'score': score} for id, name, score in super().get_cursor.fetchall()]
+
+    def get_highscores_by_name(self, name):
+        """Get top scores. Most recent entries are preferred in the event of a tie."""
+        super().get_cursor.execute("SELECT id,name,score FROM players WHERE name = ? ORDER BY score DESC", (name,))
+        return [{'id': id, 'name': name, 'score': score} for id, name, score in super().get_cursor.fetchall()]
+
+    def delete_high_score_entry(self, id):
+        """Delete an entry by its ID."""
+        super().get_cursor.execute("DELETE FROM players WHERE id=?", (id,))
+        super().get_connection.commit()
 
     def create_player(self, name):
         """Add a player to the DB and return their unique ID"""
@@ -63,8 +73,7 @@ class DatabaseHandler(db.DBase):
 
         # set up tables
         c.execute("CREATE TABLE questions (id INTEGER PRIMARY KEY, questiontext TEXT)")
-        c.execute(
-            "CREATE TABLE answers (id INTEGER PRIMARY KEY, questionid INTEGER, answertext TEXT, correct INTEGER, FOREIGN KEY(questionid) REFERENCES questions(id))")
+        c.execute("CREATE TABLE answers (id INTEGER PRIMARY KEY, questionid INTEGER, answertext TEXT, correct INTEGER, FOREIGN KEY(questionid) REFERENCES questions(id))")
         c.execute("CREATE TABLE players (id INTEGER PRIMARY KEY, name TEXT, score INTEGER)")
 
         # import and insert seed data

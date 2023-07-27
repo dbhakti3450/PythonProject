@@ -113,14 +113,31 @@ def show_high_score(dbh):
     print("\nHigh scores:")
     rank = 0
     print("  {0} {1} {2}".format("Rank", "Pts", "Name"))
-    for hs_entry in dbh.get_highscores():
+    for hs_entry in dbh.get_highscores(5):
         rank += 1
         print("  {0:3d}. {1:3d} {2}".format(rank, hs_entry['score'], hs_entry['name']))
 
 
-def delete_high_score():
+def delete_high_score(dbh):
     # Implement the logic to delete the high score here
-    print("High score deleted.")
+    name = input("Please enter the name whose high score needs to be deleted: ")
+    high_scores = dbh.get_highscores_by_name(name)
+    if len(high_scores) == 0:
+        print("No Player with that name")
+    elif len(high_scores) == 1:
+        print("One entry found!")
+        print("  {0} {1} {2}".format("Rank", "Pts", "Name"))
+        print("  {0:3d}. {1:3d} {2} \n".format(high_scores[0]['id'], high_scores[0]['score'], high_scores[0]['name']))
+        dbh.delete_high_score_entry(high_scores[0]['id'])
+        print("Entry Deleted")
+    else:
+        print("Multiple Entries found!")
+        print("  {0} {1} {2}".format("Rank", "Pts", "Name"))
+        for hs_entry in high_scores:
+            print("  {0:3d}. {1:3d} {2}".format(hs_entry['id'], hs_entry['score'], hs_entry['name']))
+        id_to_be_deleted = input("Enter id to be deleted")
+        dbh.delete_high_score_entry(id_to_be_deleted)
+        print("Entry Deleted")
 
 
 def play_quiz(dbh):
@@ -225,7 +242,7 @@ if __name__ == '__main__':
         elif choice == '3':
             show_high_score(dbh)
         elif choice == '4':
-            delete_high_score()
+            delete_high_score(dbh)
         elif choice == '5':
             play_quiz(dbh)
         elif choice == '6':
