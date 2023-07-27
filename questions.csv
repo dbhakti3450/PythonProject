@@ -1,0 +1,23 @@
+Question_Number,Questions
+0,Which of the parts of a computer actually executes the program instructions?
+1,What is the function of the secondary memory in a computer?
+2,Python scripts (files) have names that end with which extension?
+3,When Python is running in the interactive mode and displaying the chevron prompt (>>>) - what question is Python asking you?
+4,Which of the following is not a correct variable name?
+5,What is the function of the main memory (RAM) in a computer?
+6,Which data type is best to store currency?
+7,What is an algorithm?
+8,Numbers and decimals (floats) can both be safely stored in a data type of type integer without losing data.
+9,The input() function always returns what kind of data type?
+10,"What Boolean will be the output of the following:
+print(5 <= 6 >=4)"
+11,"Which conversion function do you use to convert the string value ""4.98"" to a decimal data type?"
+12,True or false; 'while' loops are Boolean based whereas 'for' loops are count controlled.
+13,What does the break statement do?
+14,What is the difference between the append() and insert() list methods?
+15,What are two ways to remove values from a list?
+16,What is the difference between lists and tuples?
+17,How do you type the tuple value that has just the integer value 42 in it?
+18,What is the main difference between a dictionary and a list?
+19,What does the code for an empty dictionary look like?
+20,Tuples have a lot of methods associated with them.
